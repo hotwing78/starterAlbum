@@ -1,0 +1,82 @@
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+@import "headerFooter";
+.container {
+  display: block;
+  clear: both;
+  width: 90%;
+  margin: 0 auto;
+}
+aside, section {
+  vertical-align: top;
+}
+section {
+  display: none;
+
+}
+aside {
+  width: 20%;
+  height:100%;
+  background-color: gray;
+  display: inline-block;
+}
+.active {
+  width: 70%;
+  display: inline-block;
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+nav li {
+  display: block;
+  padding: 20px;
+  outline: 1px solid white;
+}
+nav a {
+  color: red;
+  text-decoration: none;
+}
+nav li:hover {
+  background-color: #00ff00;
+}
+nav li:hover a {
+  color: #ff0000;
+}
+
+.albums{
+    margin-left: 20%;
+  div {
+    margin-right: 11%;
+   display: inline-block;
+  }
+}
+
+.albumDetail{
+  width: 100%;
+}
+.albumDetail span{
+  display:inline-block;
+}
+
+.albumDetail .photo {
+  margin: 0 8%;
+  display: inline-block;
+}
+.albumDetail img {
+  width: 100px;
+  transition: all .5s ease;
+}
+.scaleImg {
+  transform: scale(5);
+}
+.albums img {
+  width: 200px;
+  height: 235px;
+}
