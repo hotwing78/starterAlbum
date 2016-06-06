@@ -9,12 +9,12 @@ var albums = [
         photo: 'http://www.fillmurray.com/200/200'
       },
       {
-        caption: 'hiking the trail',
-        photo: 'http://lorempixel.com/400/200/'
+        caption: 'making the trail',
+        photo: 'http://www.fillmurray.com/200/200'
       },
       {
-        caption: 'hiking the trail',
-        photo: 'http://lorempixel.com/400/200/'
+        caption: 'destroy the trail',
+        photo: 'http://www.fillmurray.com/200/200'
       }
     ]
   },
@@ -32,7 +32,7 @@ var albums = [
         photo: 'http://lorempixel.com/400/200/'
       },
       {
-        caption: 'hiking the trail',
+        caption: 'something different',
         photo: 'http://lorempixel.com/400/200/'
       }
     ]

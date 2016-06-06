@@ -1,12 +1,13 @@
 
 $(document).ready(function () {
   var albumsStr = '';
+
   albums.forEach(function (item, idx, arr) {
     albumsStr += `<div class="album" data-id="${item.id}">
                   <h3>${item.title}</h3>
                   <img src="${item.cover}" alt="">
                 </div>`;
-  })
+    })// end of albums.forEach
 
 
 
@@ -15,14 +16,16 @@ $(document).ready(function () {
   $('.albums').on('click', '.album', function (event) {
       console.log($(this).data('id'));
       var albumId = $(this).data('id');
+
       var selectedAlbum = albums.filter(function (item, idx, arr) {
         return item.id === albumId;
-      })
+      })//end of selectedAlbum filter function;
 
-      $(`header h1`).text(albumId);
+      $(`header h1`).text(albumId);// changes the title of the header to the selected album
+
      albums.forEach(function(item,idx,arr){
        $('.albumDetail .navbar nav ul').append(`<li class = "albumLink" data-id="${item.id}">${item.title}</li>`);
-     });
+     });//end of albums.forEach.... this attaches the list items to my unordered list on the page
 
       var photosStr= '';
 
@@ -31,24 +34,38 @@ $(document).ready(function () {
                         <h3>${item.caption}</h3>
                         <img src="${item.photo}" alt="">
                       </div>`
-      });
-      $('.albumDetail').addClass('active');
-      $('.albumDetail').siblings().removeClass('active');
-      $('.albumDetail').append(photosStr);
+          });//end of selectedAlbum..... this loads my photos from the selected items to the html document.
+
+      $('.albumDetail').addClass('active');// this makes my selected album visible
+      $('.albumDetail').siblings().removeClass('active');// this hides the other items
+      $('.albumDetail').append(photosStr);// this attaches my photos to the active document
+    });//End of the album on click event handler
+
+      $('body').on('click', '.photo', function(event){
+         event.preventDefault();
+         $('.photo').addClass('scaleImg');
       });
 
-      $('.albumDetail .navbar ul li').on('click', function(event){
-            // event.preventDefault();
-            console.log($(this).data('id'));
-        var  anotherAlbumId = $(this).data('id');
-        $(`h1`).replaceWith('<h1>'+ anotherAlbumId +'</h1>');
-          var anotherAlbum = albums.filter(function (item, idx, arr) {
-            return item.id === anotherAlbumId;
-          });
-          anotherAlbum[0].pictures.forEach(function (item, idx, arr) {
-              console.log(item.caption);
-            $('.albumDetail div .photo h3').html(`${item.caption}`)
-          });
+      $('body').on('click', '.albumDetail .navbar ul li', function(event){
+           event.preventDefault();
+           var  anotherAlbumId = $(this).data('id');
+           $(`h1`).text(anotherAlbumId);
+           $(`.albumDetail .photo`).remove()
+           var anotherAlbum = albums.filter(function (item, idx, arr) {
+             return item.id === anotherAlbumId;
+           });
 
-        })
-})
+           var photosStr = '';
+           anotherAlbum[0].pictures.forEach(function (item, idx, arr) {
+             photosStr += `<div class="photo">
+                             <h3>${item.caption}</h3>
+                             <img src="${item.photo}" alt="">
+                           </div>`
+               });
+          //     caption = item.caption;
+          //   $('.albumDetail div.photo:nth-child(1n) h3').text(caption)
+          //  });
+          $('.albumDetail').append(photosStr);
+        }) // end of the li on click event handler
+
+})// end of the document ready function
