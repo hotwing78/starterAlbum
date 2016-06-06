@@ -42,7 +42,7 @@ $(document).ready(function () {
     });//End of the album on click event handler
 
       $('body').on('click', '.photo', function(event){
-         event.preventDefault();gi
+         event.preventDefault();
          if(!$(this).hasClass('scaleImg')){
          $(this).addClass('scaleImg');
          $('h3').addClass('hidden');
