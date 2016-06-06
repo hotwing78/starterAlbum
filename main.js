@@ -52,7 +52,7 @@ $(document).ready(function () {
          }
        });
 
-      $('body').on('click', '.albumDetail .navbar ul li', function(event){
+      $('.albumDetail').on('click', 'li', function(event){
            event.preventDefault();
            var  anotherAlbumId = $(this).data('id');
            $(`h1`).text(anotherAlbumId);
