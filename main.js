@@ -42,15 +42,23 @@ $(document).ready(function () {
     });//End of the album on click event handler
 
       $('body').on('click', '.photo', function(event){
-         event.preventDefault();
-         $('.photo').addClass('scaleImg');
-      });
+         event.preventDefault();gi
+         if(!$(this).hasClass('scaleImg')){
+         $(this).addClass('scaleImg');
+         $('h3').addClass('hidden');
+         }else{
+           $('h3').removeClass('hidden');
+           $(this).removeClass('scaleImg');
+         }
+       });
 
       $('body').on('click', '.albumDetail .navbar ul li', function(event){
            event.preventDefault();
            var  anotherAlbumId = $(this).data('id');
            $(`h1`).text(anotherAlbumId);
+
            $(`.albumDetail .photo`).remove()
+
            var anotherAlbum = albums.filter(function (item, idx, arr) {
              return item.id === anotherAlbumId;
            });
@@ -62,9 +70,6 @@ $(document).ready(function () {
                              <img src="${item.photo}" alt="">
                            </div>`
                });
-          //     caption = item.caption;
-          //   $('.albumDetail div.photo:nth-child(1n) h3').text(caption)
-          //  });
           $('.albumDetail').append(photosStr);
         }) // end of the li on click event handler
 

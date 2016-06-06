@@ -77,3 +77,6 @@ nav li:hover a {
 .albums img {
   width: 200px;
   height: 235px; }
+
+.hidden {
+  display: none; }
