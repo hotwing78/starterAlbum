@@ -18,17 +18,13 @@ $(document).ready(function () {
       var selectedAlbum = albums.filter(function (item, idx, arr) {
         return item.id === albumId;
       })
-      $(`header h1`).text(albumId);
-      var navbarSet ='';
 
-      navbarSet += `<aside class = "navbar">
-                     <nav><ul>`;
+      $(`header h1`).text(albumId);
      albums.forEach(function(item,idx,arr){
-       navbarSet += `<li><a href = '#'>${item.title}</a></li>`;
+       $('.albumDetail .navbar nav ul').append(`<li class = "albumLink" data-id="${item.id}">${item.title}</li>`);
      });
 
-
-      var photosStr = navbarSet + `</ul></nav></aside>`;
+      var photosStr= '';
 
       selectedAlbum[0].pictures.forEach(function (item, idx, arr) {
         photosStr += `<div class="photo">
@@ -36,16 +32,23 @@ $(document).ready(function () {
                         <img src="${item.photo}" alt="">
                       </div>`
       });
-
-
       $('.albumDetail').addClass('active');
       $('.albumDetail').siblings().removeClass('active');
-      $('.albumDetail').html(navbarSet);
-      $('.albumDetail').html(photosStr);
-      $('.albumDetail .photo img').on('click', function(event){
-        $(this).addClass('scaleImg');
+      $('.albumDetail').append(photosStr);
       });
 
-      // $('body').html(navbarSet);
-  })
+      $('.albumDetail .navbar ul li').on('click', function(event){
+            // event.preventDefault();
+            console.log($(this).data('id'));
+        var  anotherAlbumId = $(this).data('id');
+        $(`h1`).replaceWith('<h1>'+ anotherAlbumId +'</h1>');
+          var anotherAlbum = albums.filter(function (item, idx, arr) {
+            return item.id === anotherAlbumId;
+          });
+          anotherAlbum[0].pictures.forEach(function (item, idx, arr) {
+              console.log(item.caption);
+            $('.albumDetail div .photo h3').html(`${item.caption}`)
+          });
+
+        })
 })

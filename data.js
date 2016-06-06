@@ -10,11 +10,11 @@ var albums = [
       },
       {
         caption: 'hiking the trail',
-        photo: 'http://www.fillmurray.com/200/200'
+        photo: 'http://lorempixel.com/400/200/'
       },
       {
         caption: 'hiking the trail',
-        photo: 'http://www.fillmurray.com/200/200'
+        photo: 'http://lorempixel.com/400/200/'
       }
     ]
   },
@@ -25,15 +25,15 @@ var albums = [
     pictures: [
       {
         caption: 'battery walk',
-        photo: 'http://www.fillmurray.com/200/200'
+        photo: 'http://lorempixel.com/400/200/'
       },
       {
         caption: 'mcradys',
-        photo: 'http://www.fillmurray.com/200/200'
+        photo: 'http://lorempixel.com/400/200/'
       },
       {
         caption: 'hiking the trail',
-        photo: 'http://www.fillmurray.com/200/200'
+        photo: 'http://lorempixel.com/400/200/'
       }
     ]
   },
@@ -43,16 +43,16 @@ var albums = [
     cover: 'http://www.equinofunholidays.com/images/stories/middle-east-asia/THAILAND-5DAYS-thmb.jpg',
     pictures: [
     {
-      caption: 'battery walk',
-      photo: 'http://www.fillmurray.com/200/200'
+      caption: 'sand',
+      photo: 'http://lorempixel.com/400/200/'
     },
     {
-      caption: 'mcradys',
-      photo: 'http://www.fillmurray.com/200/200'
+      caption: 'parties',
+      photo: 'http://lorempixel.com/400/200/'
     },
     {
       caption: 'hiking the trail',
-      photo: 'http://www.fillmurray.com/200/200'
+      photo: 'http://lorempixel.com/400/200/'
     }
     ]
   },
@@ -63,15 +63,15 @@ var albums = [
     pictures: [
     {
       caption: 'battery walk',
-      photo: 'http://www.fillmurray.com/200/200'
+      photo: 'http://lorempixel.com/400/200/'
     },
     {
       caption: 'mcradys',
-      photo: 'http://www.fillmurray.com/200/200'
+      photo: 'http://lorempixel.com/400/200/'
     },
     {
       caption: 'hiking the trail',
-      photo: 'http://www.fillmurray.com/200/200'
+      photo: 'http://lorempixel.com/400/200/'
     }
     ]
   },
@@ -82,15 +82,15 @@ var albums = [
     pictures: [
     {
       caption: 'battery walk',
-      photo: 'http://www.fillmurray.com/200/200'
+      photo: 'http://lorempixel.com/400/200/'
     },
     {
       caption: 'mcradys',
-      photo: 'http://www.fillmurray.com/200/200'
+      photo: 'http://lorempixel.com/400/200/'
     },
     {
       caption: 'hiking the trail',
-      photo: 'http://www.fillmurray.com/200/200'
+      photo: 'http://lorempixel.com/400/200/'
     }
     ]
   },
@@ -101,15 +101,15 @@ var albums = [
     pictures: [
     {
       caption: 'battery walk',
-      photo: 'http://www.fillmurray.com/200/200'
+      photo: 'http://lorempixel.com/400/200/'
     },
     {
       caption: 'mcradys',
-      photo: 'http://www.fillmurray.com/200/200'
+      photo: 'http://lorempixel.com/400/200/'
     },
     {
       caption: 'hiking the trail',
-      photo: 'http://www.fillmurray.com/200/200'
+      photo: 'http://lorempixel.com/400/200/'
     }
     ]
   }
