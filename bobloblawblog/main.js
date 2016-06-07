@@ -1,80 +1,163 @@
-var blogHtmlStr = "<ul>";
-blogs.forEach(function(element,idx) {
-  blogHtmlStr += `
-    <li>
-      <h3>Title: ${element.title}</h3>
-      <p>${idx + 1}: ${element.content} </p>
-      <h5>By: ${element.author} </h5>
-    </li>
-  `
-});
-blogHtmlStr += "</ul>"
-$('.blogs').append(blogHtmlStr);
-
-$("button").on('click', function(event) {
-  event.preventDefault();
-  var newBlogPost = {
-    title: $('input[name="title"]').val(),
-    author: $('input[name="author"]').val(),
-    content: $('textarea').val()
-  };
-  var htmlStr = `
-    <li>
-      <h3>Title: ${newBlogPost.title}</h3>
-      <p>${newBlogPost.content} </p>
-      <h5>By: ${newBlogPost.author} </h5>
-    </li>
-  `
-  blogs.push(newBlogPost);
-  $('section ul').append(htmlStr);
-  $('.input-field').val("");
-})//end click event
-
-$('li').on('click', function(event) {
-  event.preventDefault();
-  var thingWeClickText = $(this).text();
-  var ourClassToShow = "." + thingWeClickText.toLowerCase();
-  $(ourClassToShow).removeClass('hidden');
-  $(ourClassToShow).siblings().addClass('hidden')
+$(document).ready(function() {
+  blogPage.init();
 })
 
-// $('li').first().on('click', function(event) {
-//   console.log("THIS SHOULD BE CONTACT THING", this);
-//   $('.contact').removeClass('hidden');
-//   $('.blogs,.about').addClass('hidden');
-// })
-//
-// $($('li')[1]).on('click', function(event) {
-//   console.log("THIS SHOULD BE About THING", this);
-//     $('.about').removeClass("hidden");
-//     $('.blogs,.contact').addClass('hidden');
-// })
-//
-// $($('li')[2]).on('click', function(event) {
-//   console.log("THIS SHOULD BE About HOME", this);
-//   $('.blogs').removeClass("hidden");
-//   $('.about,.contact').addClass('hidden');
-// })
+var blogPage = {
+  url: 'http://tiny-tiny.herokuapp.com/collections/bobloblaws',
+  blogs: [],
+  init: function() {
+    blogPage.styling();
+    blogPage.events();
+  },
+  styling: function() {
+    blogPage.getBlogs();
+  },
+  events: function() {
+    //Submit Edit
+    $('body').on('click', '#change-btn', function(event) {
+      event.preventDefault();
+      var $edit = $('#edit-fields')
+      var objToUpdate = {
+        id: $edit.data('id'),
+        title: $edit.find("input[name='title']").val(),
+        author: $edit.find('input[name="author"]').val(),
+        content: $edit.find('textarea').text(),
+      }
+      console.log("TEST", objToUpdate)
+      blogPage.updateBlog(objToUpdate)
+      $edit.remove();
 
-// var otherPages = {
-//   about: `
-//   <div class="container jumbotron">
-//     <h1>This is the about page</h1>
-//     <p>
-//       We are at the same level as the law.
-//     </p>
-//   </div>
-//   `,
-//   contact: `
-//   <div class="container jumbotron">
-//     <h1>Please do not contact me</h1>
-//     <p>
-//       I am above the law.
-//     </p>
-//   </div>
-//   `
-// }
 
-//contact
+    })
 
-// "<li><h3>Title: " + element.title + "</h3><p>" + idx + ":"
+    // Show Edit Fields
+    $('.blogs').on('click','.edit',function(event) {
+      event.preventDefault();
+      var that = this;
+      $.ajax({
+        method: 'GET',
+        url: blogPage.url + "/" + $(that).parent().data('id'),
+        success: function(data) {
+          var htmlToAppend = blogPage.htmlGenerator(blogTemplates.edit,data)
+          $(that).parent().append(htmlToAppend)
+        },
+        error: function(err) {
+          console.error("NO LIKEY", err);
+        }
+      })
+
+    })
+
+    //Add New Post
+    $("form button").on('click', function(event) {
+      event.preventDefault();
+      var newBlogPost = {
+        title: $('input[name="title"]').val(),
+        author: $('input[name="author"]').val(),
+        content: $('textarea').val()
+      };
+      blogPage.createBlog(newBlogPost);
+      $('.input-field').val("");
+    })//end click event
+
+    //Change pages
+    $('header nav li').on('click', function(event) {
+      event.preventDefault();
+      var thingWeClickText = $(this).text();
+      var ourClassToShow = "." + thingWeClickText.toLowerCase();
+
+      if(thingWeClickText.toLowerCase() === 'home') {
+        $(ourClassToShow).removeClass('hidden')
+        $(ourClassToShow).siblings().addClass('hidden')
+      } else {
+        var htmlStr = blogPage.htmlGenerator(blogTemplates[thingWeClickText.toLowerCase()])
+        $(ourClassToShow).removeClass('hidden').append(htmlStr);
+        $(ourClassToShow).siblings().addClass('hidden')
+      }
+    })
+
+    $('.blogs').on('click','.delete', function(event) {
+      event.preventDefault();
+      var blogId = $(this).parent().data('id');
+      blogPage.deleteBlog(blogId);
+    })
+  },
+
+  createBlog: function(blog) {
+    $.ajax({
+      url: blogPage.url,
+      method: "POST",
+      data: blog,
+      success: function(data) {
+        console.log("WE CREATED SOMETHING", data);
+        var htmlStr = blogPage.htmlGenerator(blogTemplates.blogTmpl,data)
+        blogPage.blogs.push(data);
+        $('.blogs ul').append(htmlStr);
+
+      },
+      error: function(err) {
+        console.error("OH CRAP", err);
+      }
+    })
+  },
+
+  updateBlog: function(blog) {
+
+    $.ajax({
+      method: 'PUT',
+      url: blogPage.url + "/" + blog.id,
+      data: blog,
+      success: function(data) {
+        console.log("UPDATED SUCCESSFULLY!!!", data);
+        blogPage.getBlogs();
+      },
+      error: function(err) {
+        console.error("I HAVE NO IDEA WHATS GOIGN ON", err);
+      }
+    })
+  },
+
+  getBlogs: function() {
+    $.ajax({
+      url: blogPage.url,
+      method: "GET",
+      success: function(data) {
+        console.log("WE GOT SOMETHING", data);
+        $('.blogs ul').html("");
+        data.forEach(function(element,idx) {
+          var blogHtmlStr = blogPage.htmlGenerator(blogTemplates.blogTmpl,element);
+          $('.blogs ul').append(blogHtmlStr)
+          blogPage.blogs.push(element);
+        });
+      },
+      error: function(err) {
+        console.error("OH CRAP", err);
+      }
+    })
+  },
+  deleteBlog: function(blogId) {
+    // find blog to delete from our blog data;
+    var deleteUrl = blogPage.url + "/" + blogId;
+    $.ajax({
+      url: deleteUrl,
+      method: "DELETE",
+      success: function(data) {
+        console.log("WE DELETED SOMETHING", data);
+        blogPage.getBlogs();
+      },
+      error: function(err) {
+        console.error("OH CRAP", err);
+      }
+    })
+  },
+
+  templification: function(template) {
+    return _.template(template);
+  },
+
+  htmlGenerator: function(template,data) {
+    var tmpl = blogPage.templification(template);
+    return tmpl(data);
+  }
+
+};
