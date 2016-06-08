@@ -44,7 +44,7 @@ var albums = [
     pictures: [
     {
       caption: 'sand',
-      photo: 'http://lorempixel.com/400/200/'
+      photo: 'https://unsplash.com/photos/UqqJ7y80ZbY'
     },
     {
       caption: 'parties',
