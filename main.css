@@ -65,18 +65,28 @@ nav li:hover a {
 
 .albumDetail .photo {
   margin: 0 8%;
-  display: inline-block; }
+  display: inline-block;
+  transition: all .5s ease-in-out; }
 
 .albumDetail img {
   width: 100px;
-  transition: all .5s ease; }
+
+   }
 
 .scaleImg {
-  transform: scale(5); }
+  transform: scale(4)
+
+   }
 
 .albums img {
   width: 200px;
-  height: 235px; }
+  height: 235px;
+
+ }
 
 .hidden {
   display: none; }
+
+  .opac{
+    opacity: 0.06;
+  }

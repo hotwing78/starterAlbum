@@ -43,18 +43,25 @@ var photoAlbum = {
               $(`header h1`).text(albumId);// changes the title of the header to the selected album
               $('.albumDetail').addClass('active');// this makes my selected album visible
               $('.albumDetail').siblings().removeClass('active');// this hides the other items
-          });
+              });
 
-          $('body').on('click', '.photo', function(event){
-                  event.preventDefault();
-                  if(!$(this).hasClass('scaleImg')){
-                  $(this).addClass('scaleImg');
-                  $('h3').addClass('hidden');
-                  }else{
-                    $('h3').removeClass('hidden');
-                    $(this).removeClass('scaleImg');
-                  }
-                 });
+
+              $('body').on('click', '.photo', function(event){
+                      event.preventDefault();
+
+                      if(!$(this).hasClass('scaleImg')){
+                      $(this).addClass('scaleImg');
+                      $(this).siblings().addClass('opac');
+                      $('header,footer').addClass('opac');
+                      $('body').css('background-color','#9a9595');
+                      }else{
+                        $('body').css('background-color','')
+                        $(this).siblings().removeClass('opac');
+                        $('header,footer').removeClass('opac');
+                        $(this).removeClass('scaleImg');
+                      }
+                     });
+
                  $('.albumDetail').on('click', 'li', function(event){
                        event.preventDefault();
                        var  anotherAlbumId = $(this).data('id');
