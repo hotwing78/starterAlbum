@@ -1,0 +1,76 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif; }
+
+h1, h2, h3 {
+  font-weight: normal;
+  margin: 0; }
+
+header {
+  height: 7%;
+  padding: .5%;
+  background-color: #333;
+  font-style: italic; }
+  header h1 {
+    height: 100%;
+    margin: .6% 0;
+    color: #ccc; }
+
+main {
+  height: 92%; }
+
+section#friends {
+  vertical-align: top;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 25%;
+  margin-right: 1%;
+  height: 100%;
+  background-color: #999; }
+  section#friends .friend {
+    margin: 2% 0;
+    padding: 1% 1%;
+    background-color: #333; }
+    section#friends .friend img {
+      width: 80px;
+      vertical-align: top; }
+    section#friends .friend .info {
+      display: inline-block;
+      vertical-align: top; }
+      section#friends .friend .info h2 {
+        margin: 10px 5px;
+        color: #bf9000; }
+      section#friends .friend .info h3 {
+        font-weight: 300;
+        margin: 5px;
+        font-size: 1em;
+        color: #ccc; }
+
+section#stream {
+  vertical-align: top;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 73%;
+  height: 100%; }
+  section#stream .user {
+    padding: .5% 1%;
+    margin-bottom: 2%; }
+    section#stream .user img {
+      border: 2px solid #333;
+      width: 100px;
+      vertical-align: top;
+      margin-right: 1%; }
+    section#stream .user .info {
+      font-size: 1.3em;
+      display: inline-block; }
+      section#stream .user .info p {
+        margin: 0;
+        height: 104px;
+        line-height: 104px; }
+      section#stream .user .info .details {
+        font-weight: 500; }
+    section#stream .user button {
+      display: block;
+      width: 104px;
+      margin-top: 1%; }
